@@ -1,0 +1,13 @@
+# Compiled source #
+###################
+*.pyc
+__pycache__/
+
+# Config Files #
+################
+settings.py
+certs/
+
+# Log Files #
+#############
+logs/
