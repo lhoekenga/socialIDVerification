@@ -4,6 +4,9 @@ import uuid
 
 from django.conf import settings
 
+import logging
+logger = logging.getLogger(__name__)
+
 def generate_jwt(entry):
 
     epoch_time = int(time.time())
@@ -26,8 +29,10 @@ def generate_jwt(entry):
                'cirrusAttributes': cirrusAttributes,
     }
 
+    logger.debug('payload={}'.format(payload))
     key = settings.BASE_DIR + '/socialIDVerification/certs/private_key.pem'
     private_key = open(key, 'r').read()  # RSA key in PEM format
     encoded = jwt.encode(payload, key=private_key, algorithm='RS256', headers={'kid': 'k1'})
 
+    logger.debug('jwt={}'.format(encoded))
     return encoded
