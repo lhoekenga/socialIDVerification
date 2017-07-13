@@ -4,88 +4,149 @@
 
 <main id="main" class="container">
 
-  <h1 class="text-center sr-only">Social ID Verification</h1>
-  <p id="title" class="text-center lead">Verify Your Identity</p>
+  <h1 id="title" class="text-center lead">Verify Your Identity</h1>
+
+<div class="row">
+<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 well well-lg">
+<div>
+        <input type="radio" name="choice-animals" id="choice-animals-dogs" required>
+        <label for="choice-animals-dogs">I like dogs more</label>
+        <div class="reveal-if-active">
+          <label for="which-dog">Good call. What's the name of your favorite dog?</label>
+          <input type="text" id="which-dog" name="which-dog" class="require-if-active" data-require-pair="#choice-animals-dogs">
+        </div>
+      </div>
+      <div>
+        <input type="radio" name="choice-animals" id="choice-animals-cats">
+        <label for="choice-animals-cats">I like cats more</label>
+        <div class="reveal-if-active">
+          <label for="which-cat">Why? Cats are weird. Respond.</label>
+          <input type="text" id="which-cat" name="which-cat" class="require-if-active" data-require-pair="#choice-animals-cats">
+        </div>
+      </div>
+</div>
+</div>
 
   <div class="row">
-    <div id="grid" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+    <div id="grid" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 well well-lg">
 
-     <fieldset class="well well-lg">
       <form id="id-verifyForm" action="" class="blueForms" method="post">
         {% csrf_token %}
 
+        {% if form.errors %}
+          {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+              {{ error|escape }}
+            </div>
+          {% endfor %}
+        {% endif %}
+
         <div class="row">
           <div id="div_id_first_name" class="col-sm-6 form-group">
-            <label class="formLabel">First Name:</label>
-            {{ form.first_name.errors }}
-            <div class="controls">
-              <input type="text" name="first_name" class="textinput textInput form-control" required id="id_first_name" placeholder="First Name" value="{{ form.first_name.value|default_if_none:"" }}">
-            </div>
+            <label class="formLabel" for="id_first_name">First Name:</label>
+            <input type="text" name="first_name" class="textinput textInput form-control" required id="id_first_name" placeholder="First Name" value="{{ form.first_name.value|default_if_none:"" }}">
+            {% if form.first_name.errors %}
+              <div class="help-block">
+                {% for error in form.first_name.errors %}
+                  {{ error|escape }}
+                {% endfor %}
+              </div>
+            {% endif %}
           </div>
           <div id="div_id_last_name" class="col-sm-6 form-group">
-            <label class="formLabel">Last Name:</label>
-            {{ form.last_name.errors }}
-            <div class="controls">
-              <input type="text" name="last_name" class="textinput textInput form-control" required id="id_last_name" placeholder="Last Name" value="{{ form.last_name.value|default_if_none:"" }}">
+            <label class="formLabel" for="id_last_name">Last Name:</label>
+            <input type="text" name="last_name" class="textinput textInput form-control" required id="id_last_name" placeholder="Last Name" value="{{ form.last_name.value|default_if_none:"" }}">
+            {% if form.last_name.errors %}
+              <div class="help-block">
+                {% for error in form.last_name.errors %}
+                  {{ error|escape }}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="formLabel" for="id_birth_date">Date of Birth:</label>
+          <input type="date" name="birth_date" class="dateinput dateInput form-control" required id="id_birth_date" placeholder="mm/dd/yyyy" value="{{ form.birth_date.value|default_if_none:"" }}">
+          {% if form.birth_date.errors %}
+            <div class="help-block">
+              {% for error in form.birth_date.errors %}
+                {{ error|escape }}
+              {% endfor %}
             </div>
-          </div>
+          {% endif %}
         </div>
         <div class="form-group">
-          <label class="formLabel">Date of Birth:</label>
-          {{ form.birth_date.errors }}
-          <div class="controls">
-            <input type="date" name="birth_date" class="dateinput dateInput form-control" required id="id_birth_date" placeholder="mm/dd/yyyy" value="{{ form.birth_date.value|default_if_none:"" }}">
-          </div>
+          <label class="formLabel" for="id_degree_year">Year of First U-M Degree:</label>
+          <input type="text" name="degree_year" max="9999" class="textinput textInput form-control" required id="id_degree_year" placeholder="yyyy" pattern="^\d{4}$" title="yyyy" maxlength="4" value="{{ form.degree_year.value|default_if_none:"" }}">
+          {% if form.degree_year.errors %}
+            <div class="help-block">
+              {% for error in form.degree_year.errors %}
+                {{ error|escape }}
+              {% endfor %}
+            </div>
+          {% endif %}
         </div>
-        <div class="form-group">
-          <label class="formLabel">Year of First U-M Degree:</label>
-          {{ form.degree_year.errors }}
-          <div class="controls">
-            <input type="text" name="degree_year" max="9999" class="textinput textInput form-control" required id="id_degree_year" placeholder="yyyy" pattern="^\d{4}$" title="yyyy" maxlength="4" value="{{ form.degree_year.value|default_if_none:"" }}">
-          </div>
+
+<div>
+        <input type="radio" name="choice-animals2" id="choice-animals-dogs2" required>
+        <label for="choice-animals-dogs2">I like dogs more</label>
+        <div class="reveal-if-active">
+          <label for="which-dog2">Good call. What's the name of your favorite dog?</label>
+          <input type="text" id="which-dog2" name="which-dog2" class="require-if-active" data-require-pair="#choice-animals-dogs2">
         </div>
+      </div>
+      <div>
+        <input type="radio" name="choice-animals2" id="choice-animals-cats2">
+        <label for="choice-animals-cats2">I like cats more</label>
+        <div class="reveal-if-active">
+          <label for="which-cat2">Why? Cats are weird. Respond.</label>
+          <input type="text" id="which-cat2" name="which-cat2" class="require-if-active" data-require-pair="#choice-animals-cats2">
+        </div>
+      </div>
 
         <div class="panel panel-default">
           <div class="panel-body">
-            <h4>ID VERIFICATION</h4>
-            <p><strong>Please select one option below and enter the information in the field provided.</strong></p>
+            <fieldset>
+              <legend class="h4">ID VERIFICATION</legend>
+              <p><strong>Please select one option below and enter the information in the field provided.</strong></p>
 
-            <div class="form-group">
-              <label class="id-verify-label" for="radio1">
-                <input type="radio" name="verifyidRadios" id="radio1" value="1" required onclick="document.getElementById('id_umid').disabled = false; document.getElementById('id_alumniID').disabled = true; document.getElementById('id_ssn').disabled = true; document.getElementById('id_umid').required = true; document.getElementById('id_alumniID').required = false; document.getElementById('id_ssn').required = false">
-                UMID. An 8-digit number found on your UM photo ID card.
-                <div id="textbox1" class="reveal-if-active">
-                  <input type="text" id="id_umid" name="umid" class="textinput textInput form-control require-if-active" pattern="^\d{8}$" title="An 8-digit number" maxlength="8" disabled>
-                </div>
-              </label>
-            </div>
-            <div class="form-group">
-              <label class="id-verify-label" for="radio2">
-                <input type="radio" name="verifyidRadios" id="radio2" value="2" onclick="document.getElementById('id_umid').disabled = true; document.getElementById('id_alumniID').disabled = false; document.getElementById('id_ssn').disabled = true; document.getElementById('id_umid').required = false; document.getElementById('id_alumniID').required = true; document.getElementById('id_ssn').required = false">
-                Alumni ID. A number 7-10 digits long.
-                <div id="textbox2" class="reveal-if-active">
-                  <input type="text" id="id_alumniID" name="alumniID" class="textinput textInput form-control require-if-active" pattern="^\d{7,10}$" title="A 7-10 digit number" maxlength="10" disabled>
-                </div>
-              </label>
-            </div>
-            <div class="form-group">
-              <label class="id-verify-label" for="radio3">
-                <input type="radio" name="verifyidRadios" id="radio3" value="3" onclick="document.getElementById('id_umid').disabled = true; document.getElementById('id_alumniID').disabled = true; document.getElementById('id_ssn').disabled = false; document.getElementById('id_umid').required = false; document.getElementById('id_alumniID').required = false; document.getElementById('id_ssn').required = true">
-                SSN. The last four digits of your SSN.
-                <div id="textbox3" class="reveal-if-active">
-                  <input type="text" id="id_ssn" name="ssn" class="textinput textInput form-control require-if-active" pattern="^\d{4}$" title="The last four digits of your SSN" maxlength="4" disabled>
-                </div>
-              </label>
-            </div>
+              <div class="form-group">
+                <label class="id-verify-label" for="radio_umid">
+                  <input type="radio" name="verifyidRadios" id="radio_umid" required onclick="document.getElementById('id_umid').disabled = false; document.getElementById('id_alumniID').disabled = true; document.getElementById('id_ssn').disabled = true; document.getElementById('id_umid').required = true; document.getElementById('id_alumniID').required = false; document.getElementById('id_ssn').required = false">
+                  UMID. An 8-digit number found on your UM photo ID card.
+                  <div class="reveal-if-active">
+                    <input type="text" id="id_umid" name="umid" class="textinput textInput form-control require-if-active" pattern="^\d{8}$" title="An 8-digit number" maxlength="8">
+                  </div>
+                </label>
+              </div>
+              <div class="form-group">
+                <label class="id-verify-label" for="radio_alumniID">
+                  <input type="radio" name="verifyidRadios" id="radio_alumniID" onclick="document.getElementById('id_umid').disabled = true; document.getElementById('id_alumniID').disabled = false; document.getElementById('id_ssn').disabled = true; document.getElementById('id_umid').required = false; document.getElementById('id_alumniID').required = true; document.getElementById('id_ssn').required = false">
+                  Alumni ID. A number 7-10 digits long.
+                  <div class="reveal-if-active">
+                    <input type="text" id="id_alumniID" name="alumniID" class="textinput textInput form-control require-if-active" pattern="^\d{7,10}$" title="A 7-10 digit number" maxlength="10">
+                  </div>
+                </label>
+              </div>
+              <div class="form-group">
+                <label class="id-verify-label" for="radio_ssn">
+                  <input type="radio" name="verifyidRadios" id="radio_ssn" onclick="document.getElementById('id_umid').disabled = true; document.getElementById('id_alumniID').disabled = true; document.getElementById('id_ssn').disabled = false; document.getElementById('id_umid').required = false; document.getElementById('id_alumniID').required = false; document.getElementById('id_ssn').required = true">
+                  SSN. The last four digits of your SSN.
+                  <div class="reveal-if-active">
+                    <input type="text" id="id_ssn" name="ssn" class="textinput textInput form-control require-if-active" pattern="^\d{4}$" title="The last four digits of your SSN" maxlength="4">
+                  </div>
+                </label>
+              </div>
 
+            </fieldset>
           </div>
         </div>
+
         <div class="form-actions">
           <input class="btn btn-primary btn-large btn-blue btn-block" type="submit" value="Submit">
         </div>
       </form>
-
-     </fieldset>
 
     </div>
   </div>
