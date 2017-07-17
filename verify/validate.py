@@ -8,6 +8,11 @@ def validate_form_data(verify_form):
 
     try:
 
+        # testing
+        if verify_form.cleaned_data['first_name'].lower() == 'slow':
+            import time
+            time.sleep(10)
+
         # just fake it for now
         entry = {
             'umichRegDisplayGivenName': ['mega'],

@@ -10,9 +10,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def index(request):
-    return HttpResponse("Hello, world")
-
 def verify(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':

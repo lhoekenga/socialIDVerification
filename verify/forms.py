@@ -57,3 +57,14 @@ class VerifyForm(forms.Form):
         #help_text='SSN',
         validators=[RegexValidator(r'^\d{4,4}$', 'Enter a 4 digit number')],
     )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        umid = cleaned_data.get("umid")
+        alumniID = cleaned_data.get("alumniID")
+        ssn = cleaned_data.get("ssn")
+
+        if not umid and not alumniID and not ssn:
+            raise forms.ValidationError(
+                "Please enter a Verification ID."
+            )
