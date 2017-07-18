@@ -40,7 +40,7 @@ class VerifyForm(forms.Form):
         validators=[RegexValidator(r'^\d{8,8}$', 'Enter a valid UMID')],
     )
 
-    lookupID = forms.CharField(
+    alumniID = forms.CharField(
         required=False,
         #label='Alumni ID',
         #min_length=8,
@@ -56,6 +56,10 @@ class VerifyForm(forms.Form):
         #max_length=4,
         #help_text='SSN',
         validators=[RegexValidator(r'^\d{4,4}$', 'Enter a 4 digit number')],
+    )
+
+    verifyidRadios = forms.CharField(
+        required=True,
     )
 
     def clean(self):

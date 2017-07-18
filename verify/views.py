@@ -1,8 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from .forms import VerifyForm
+from django.conf import settings
 
-from django.http import Http404
+from .forms import VerifyForm
 from .validate import validate_form_data 
 from .cirrus_jwt import generate_jwt
 
@@ -26,7 +26,7 @@ def verify(request):
                 cirrus_proxy_url = generate_jwt(entry)
                 return redirect('confirmed')
             else:
-                form.add_error(None, 'Unable to validate identity')
+                form.add_error(None, settings.VALIDATION_ERROR_MESSAGE)
         else:
             logger.warn('form.errors={}'.format(form.errors.as_json(escape_html=False)))
 

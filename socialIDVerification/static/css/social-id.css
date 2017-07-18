@@ -251,7 +251,7 @@ a:focus {
 .img-responsive {
     display: block;
     max-width: 100%;
-    height: auto
+    height: auto;
 }
 
 hr {
@@ -2427,24 +2427,9 @@ footer .footer-links li {
 }
 
 .banner-img {
-    background: url(/cosign/img/weblogin.png) no-repeat #00274c;
     display: block;
-    margin-left: 10px;
-    background-size: 230px 40px;
-    width: 230px;
-    height: 40px;
-    line-height: 40px
-}
-
-@media only screen and (-moz-min-device-pixel-ratio:1.5),
-only screen and (-o-min-device-pixel-ratio:3/2),
-only screen and (-webkit-min-device-pixel-ratio:1.5),
-only screen and (min-devicepixel-ratio:1.5),
-only screen and (min-resolution:1.5dppx) {
-    .banner-img {
-        background-image: url(/cosign/img/weblogin@2x.png);
-        background-size: 226px 40px
-    }
+    width: 100%;
+    max-width: 820px;
 }
 
 .reveal-if-active {

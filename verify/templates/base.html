@@ -10,16 +10,17 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <style>
-            <!--body { background-image: url("https://weblogin-dev.dsc.umich.edu/cosign/img/bg-weblogin-dev.dsc.umich.edu.png"); }-->
             body { background-image: url({% static 'img/bg-social-dev.dsc.umich.edu.png' %}); }
         </style>
+        <link rel="shortcut icon" href="/static/img/favicon.ico">
     </head>
     <body>
         <!--<div class="page-header">
             <h1>Social ID Verification</h1>
         </div>-->
         <header class="container" role="banner">
-            <div class="banner-img" title="U-M Weblogin wordmark"></div>
+          <a href="#"><img src="/static/img/wordmark.png" class="container banner-img img-responsive pull-left" alt="U-M Social Login wordmark"></a>
+          <!--<div class="banner-img" title="U-M Social Login wordmark"></div>-->
         </header>
         {% block content %}
         {% endblock %}
