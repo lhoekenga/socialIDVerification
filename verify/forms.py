@@ -31,6 +31,15 @@ class VerifyForm(forms.Form):
         validators=[RegexValidator(r'^\d{4,4}$', 'Enter a valid four digit year')],
     )
 
+    degree_year2 = forms.CharField(
+        required=True,
+        #label='Year of First U-M Degree',
+        #min_length=4,
+        #max_length=4,
+        #widget=forms.TextInput(attrs={'placeholder': 'yyyy'}),
+        validators=[RegexValidator(r'^\d{4,4}$', 'Enter a valid four digit year')],
+    )
+
     umid = forms.CharField(
         required=False,
         #label='UMID',

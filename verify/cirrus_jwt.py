@@ -21,16 +21,17 @@ def generate_jwt(entry):
         'eppn': eppn,
     }
 
-    payload = {'aud': 'umich-uat',
-               'lat': epoch_time,
-               'exp': exp_time,
-               'jti': str(uuid.uuid4()),
-               'sub': dirId,
-               'cirrusAttributes': cirrusAttributes,
+    payload = {
+        'aud': 'umich-uat',
+        'lat': epoch_time,
+        'exp': exp_time,
+        'jti': str(uuid.uuid4()),
+        'sub': dirId,
+        'cirrusAttributes': cirrusAttributes,
     }
 
     logger.debug('payload={}'.format(payload))
-    key = settings.BASE_DIR + '/socialIDVerification/certs/private_key.pem'
+    key = settings.CERT_DIR + 'private_key.pem'
     private_key = open(key, 'r').read()  # RSA key in PEM format
     encoded = jwt.encode(payload, key=private_key, algorithm='RS256', headers={'kid': 'k1'})
 

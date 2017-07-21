@@ -1245,7 +1245,7 @@ fieldset[disabled] .form-control {
     input[type=time].form-control,
     input[type=datetime-local].form-control,
     input[type=month].form-control {
-        line-height: 34px
+        line-height: normal
     }
     .input-group-sm input[type=date],
     .input-group-sm input[type=time],
@@ -1255,7 +1255,7 @@ fieldset[disabled] .form-control {
     input[type=time].input-sm,
     input[type=datetime-local].input-sm,
     input[type=month].input-sm {
-        line-height: 30px
+        line-height: normal
     }
     .input-group-lg input[type=date],
     .input-group-lg input[type=time],
@@ -1265,7 +1265,7 @@ fieldset[disabled] .form-control {
     input[type=time].input-lg,
     input[type=datetime-local].input-lg,
     input[type=month].input-lg {
-        line-height: 46px
+        line-height: normal
     }
 }
 
@@ -2471,3 +2471,11 @@ input[type="checkbox"]:checked ~ .reveal-if-active {
     font-weight: 400;
     width: 100%;
 }
+
+/*input[type='text'],
+input[type='number'],
+input[type='date'],
+textarea {
+  font-size: 16px;
+}
+*/

@@ -46,7 +46,7 @@
         </div>
         <div class="form-group {% if form.birth_date.errors %}has-error{% endif %}">
           <label class="control-label" for="id_birth_date">Date of Birth:</label>
-          <input type="date" name="birth_date" class="dateinput dateInput form-control" required id="id_birth_date" placeholder="mm/dd/yyyy" autocomplete="off" value="{{ form.birth_date.value|default_if_none:"" }}">
+          <input type="date" name="birth_date" class="dateinput dateInput form-control" required id="id_birth_date" placeholder="mm/dd/yyyy" pattern="^\d{1,2}\/\d{1,2}\/\d{4}$" title="mm/dd/yyyy" autocomplete="off" value="{{ form.birth_date.value|default_if_none:"" }}">
           {% if form.birth_date.errors %}
             <div class="help-block">
               {% for error in form.birth_date.errors %}
@@ -65,6 +65,11 @@
               {% endfor %}
             </div>
           {% endif %}
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="id_degree_year2">Input type="number":</label>
+          <input type="number" name="degree_year2" class="textinput textInput form-control" required id="id_degree_year2" placeholder="yyyy" pattern="^\d{4}$" title="yyyy" min="0" max="9999" maxlength="4" title="yyyy" oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
         </div>
 
         <div class="panel panel-default">
