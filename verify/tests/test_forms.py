@@ -18,14 +18,16 @@ class VerifyFormTests(SimpleTestCase):
             'last_name': 'man',
             'birth_date': datetime.date(2000, 1, 1),
             'degree_year': '2008',
+            'verifyidRadios': 'umid',
             'umid': '12345678',
         })
         self.assertTrue(form.is_valid())
-        self.assertEqual(form.cleaned_data['first_name'], "mega")
-        self.assertEqual(form.cleaned_data['last_name'], "man")
+        self.assertEqual(form.cleaned_data['first_name'], 'mega')
+        self.assertEqual(form.cleaned_data['last_name'], 'man')
         self.assertEqual(form.cleaned_data['birth_date'], datetime.date(2000, 1, 1))
-        self.assertEqual(form.cleaned_data['degree_year'], "2008")
-        self.assertEqual(form.cleaned_data['umid'], "12345678")
+        self.assertEqual(form.cleaned_data['degree_year'], '2008')
+        self.assertEqual(form.cleaned_data['verifyidRadios'], 'umid')
+        self.assertEqual(form.cleaned_data['umid'], '12345678')
 
     # Test for all required fields
     def test_blank_data(self):
@@ -35,5 +37,5 @@ class VerifyFormTests(SimpleTestCase):
         self.assertEqual(form.errors['last_name'], ['This field is required.'])
         self.assertEqual(form.errors['birth_date'], ['This field is required.'])
         self.assertEqual(form.errors['degree_year'], ['This field is required.'])
-        self.assertEqual(form.errors['__all__'], ['Please enter a Verification ID.'])
+        self.assertEqual(form.errors['verifyidRadios'], ['This field is required.'])
 

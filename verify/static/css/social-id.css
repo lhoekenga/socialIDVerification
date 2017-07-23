@@ -2436,7 +2436,6 @@ footer .footer-links li {
     opacity: 0;
     max-height: 0px;
     overflow: hidden;
-    font-size: 16px;
     -webkit-transform: scale(0.8);
     transform: scale(0.8);
     -webkit-transition: 500ms;
@@ -2458,7 +2457,7 @@ input[type="radio"]:checked ~ .reveal-if-active,
 input[type="checkbox"]:checked ~ .reveal-if-active {
     opacity: 1;
     max-height: 100px;
-    padding: 10px 20px;
+    padding: 10px 20px 0px;
     -webkit-transform: scale(1);
     transform: scale(1);
     overflow: visible;
@@ -2472,10 +2471,12 @@ input[type="checkbox"]:checked ~ .reveal-if-active {
     width: 100%;
 }
 
-/*input[type='text'],
-input[type='number'],
-input[type='date'],
-textarea {
-  font-size: 16px;
+input[type="date"]  {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
 }
-*/
+
+.hide-disabled:not([required]) {
+    display: none;
+    visibility: hidden;
+}

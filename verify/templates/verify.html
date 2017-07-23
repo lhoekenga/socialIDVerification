@@ -23,7 +23,7 @@
         <div class="row">
           <div id="div_id_first_name" class="col-sm-6 form-group {% if form.first_name.errors %}has-error{% endif %}">
             <label class="control-label" for="id_first_name">First Name:</label>
-            <input type="text" name="first_name" class="textinput textInput form-control" required id="id_first_name" placeholder="First Name" value="{{ form.first_name.value|default_if_none:"" }}">
+            <input type="text" name="first_name" class="form-control" required id="id_first_name" placeholder="First Name" value="{{ form.first_name.value|default_if_none:"" }}">
             {% if form.first_name.errors %}
               <div class="help-block">
                 {% for error in form.first_name.errors %}
@@ -34,7 +34,7 @@
           </div>
           <div id="div_id_last_name" class="col-sm-6 form-group {% if form.last_name.errors %}has-error{% endif %}">
             <label class="control-label" for="id_last_name">Last Name:</label>
-            <input type="text" name="last_name" class="textinput textInput form-control" required id="id_last_name" placeholder="Last Name" value="{{ form.last_name.value|default_if_none:"" }}">
+            <input type="text" name="last_name" class="form-control" required id="id_last_name" placeholder="Last Name" value="{{ form.last_name.value|default_if_none:"" }}">
             {% if form.last_name.errors %}
               <div class="help-block">
                 {% for error in form.last_name.errors %}
@@ -46,7 +46,7 @@
         </div>
         <div class="form-group {% if form.birth_date.errors %}has-error{% endif %}">
           <label class="control-label" for="id_birth_date">Date of Birth:</label>
-          <input type="date" name="birth_date" class="dateinput dateInput form-control" required id="id_birth_date" placeholder="mm/dd/yyyy" pattern="^\d{1,2}\/\d{1,2}\/\d{4}$" title="mm/dd/yyyy" autocomplete="off" value="{{ form.birth_date.value|default_if_none:"" }}">
+          <input type="date" name="birth_date" class="form-control" required id="id_birth_date" placeholder="mm/dd/yyyy" pattern="^\d{1,2}\/\d{1,2}\/\d{4}$" title="mm/dd/yyyy" autocomplete="off" value="{{ form.birth_date.value|default_if_none:"" }}">
           {% if form.birth_date.errors %}
             <div class="help-block">
               {% for error in form.birth_date.errors %}
@@ -57,7 +57,7 @@
         </div>
         <div class="form-group {% if form.degree_year.errors %}has-error{% endif %}">
           <label class="control-label" for="id_degree_year">Year of First U-M Degree:</label>
-          <input type="text" name="degree_year" max="9999" class="textinput textInput form-control" required id="id_degree_year" placeholder="yyyy" pattern="^\d{4}$" title="yyyy" maxlength="4" value="{{ form.degree_year.value|default_if_none:"" }}">
+          <input type="number" name="degree_year" class="form-control" required id="id_degree_year" placeholder="yyyy" pattern="^\d{4}$" title="yyyy" maxlength="4" value="{{ form.degree_year.value|default_if_none:"" }}" oninput="enforceMaxLength(this); enforcePattern(this)">
           {% if form.degree_year.errors %}
             <div class="help-block">
               {% for error in form.degree_year.errors %}
@@ -68,8 +68,8 @@
         </div>
 
         <div class="form-group">
-          <label class="control-label" for="id_degree_year2">Input type="number":</label>
-          <input type="number" name="degree_year2" class="textinput textInput form-control" required id="id_degree_year2" placeholder="yyyy" pattern="^\d{4}$" title="yyyy" min="0" max="9999" maxlength="4" title="yyyy" oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+          <label class="control-label" for="id_degree_year2">Year of First U-M Degree Tel:</label>
+          <input type="text" name="degree_year2" class="form-control" required id="id_degree_year2" placeholder="yyyy" pattern="^\d{4}$" title="yyyy" maxlength="4">
         </div>
 
         <div class="panel panel-default">
@@ -78,30 +78,51 @@
               <legend class="h4">ID VERIFICATION</legend>
               <p><strong>Please select one option below and enter the information in the field provided.</strong></p>
 
-              <div class="form-group">
+              <div class="form-group {% if form.umid.errors %}has-error{% endif %}">
                 <label class="id-verify-label" for="radio_umid">
-                  <input type="radio" name="verifyidRadios" id="radio_umid" value="umid" {% if form.verifyidRadios.value == "umid" %}checked="checked"{% endif %} required onclick="document.getElementById('id_umid').disabled = false; document.getElementById('id_alumniID').disabled = true; document.getElementById('id_ssn').disabled = true; document.getElementById('id_umid').required = true; document.getElementById('id_alumniID').required = false; document.getElementById('id_ssn').required = false">
+                  <input type="radio" name="verifyidRadios" id="radio_umid" value="umid" {% if form.verifyidRadios.value == "umid" %}checked="checked"{% endif %} required onclick="enableVerifyid(this)">
                   UMID. An 8-digit number found on your UM photo ID card.
                   <div class="reveal-if-active">
-                    <input type="text" id="id_umid" name="umid" class="textinput textInput form-control require-if-active" pattern="^\d{8}$" title="An 8-digit number" maxlength="8" value="{{ form.umid.value|default_if_none:"" }}">
+                    <input type="number" id="id_umid" name="umid" class="form-control hide-disabled" pattern="^\d{8}$" maxlength="8" value="{{ form.umid.value|default_if_none:"" }}" oninput="enforceMaxLength(this); enforcePattern(this)">
+                    {% if form.umid.errors %}
+                      <div class="help-block">
+                        {% for error in form.umid.errors %}
+                          {{ error|escape }}
+                        {% endfor %}
+                      </div>
+                    {% endif %}
                   </div>
                 </label>
               </div>
               <div class="form-group">
                 <label class="id-verify-label" for="radio_alumniID">
-                  <input type="radio" name="verifyidRadios" id="radio_alumniID" value="alumniID" {% if form.verifyidRadios.value == "alumniID" %}checked="checked"{% endif %} onclick="document.getElementById('id_umid').disabled = true; document.getElementById('id_alumniID').disabled = false; document.getElementById('id_ssn').disabled = true; document.getElementById('id_umid').required = false; document.getElementById('id_alumniID').required = true; document.getElementById('id_ssn').required = false">
+                  <input type="radio" name="verifyidRadios" id="radio_alumniID" value="alumniID" {% if form.verifyidRadios.value == "alumniID" %}checked="checked"{% endif %} onclick="enableVerifyid(this)">
                   Alumni ID. A number 7-10 digits long.
                   <div class="reveal-if-active">
-                    <input type="text" id="id_alumniID" name="alumniID" class="textinput textInput form-control require-if-active" pattern="^\d{7,10}$" title="A 7-10 digit number" maxlength="10" value="{{ form.alumniID.value|default_if_none:"" }}">
+                    <input type="number" id="id_alumniID" name="alumniID" class="form-control hide-disabled" pattern="^\d{7,10}$" maxlength="10" value="{{ form.alumniID.value|default_if_none:"" }}" oninput="enforceMaxLength(this); enforcePattern(this)">
+                    {% if form.alumniID.errors %}
+                      <div class="help-block">
+                        {% for error in form.alumniID.errors %}
+                          {{ error|escape }}
+                        {% endfor %}
+                      </div>
+                    {% endif %}
                   </div>
                 </label>
               </div>
               <div class="form-group">
                 <label class="id-verify-label" for="radio_ssn">
-                  <input type="radio" name="verifyidRadios" id="radio_ssn" value="ssn" {% if form.verifyidRadios.value == "ssn" %}checked="checked"{% endif %} onclick="document.getElementById('id_umid').disabled = true; document.getElementById('id_alumniID').disabled = true; document.getElementById('id_ssn').disabled = false; document.getElementById('id_umid').required = false; document.getElementById('id_alumniID').required = false; document.getElementById('id_ssn').required = true">
+                  <input type="radio" name="verifyidRadios" id="radio_ssn" value="ssn" {% if form.verifyidRadios.value == "ssn" %}checked="checked"{% endif %} onclick="enableVerifyid(this)">
                   SSN. The last four digits of your SSN.
                   <div class="reveal-if-active">
-                    <input type="text" id="id_ssn" name="ssn" class="textinput textInput form-control require-if-active" pattern="^\d{4}$" title="The last four digits of your SSN" maxlength="4" value="{{ form.ssn.value|default_if_none:"" }}">
+                    <input type="number" id="id_ssn" name="ssn" class="form-control hide-disabled" pattern="^\d{4}$" maxlength="4" value="{{ form.ssn.value|default_if_none:"" }}" oninput="enforceMaxLength(this); enforcePattern(this)">
+                    {% if form.ssn.errors %}
+                      <div class="help-block">
+                        {% for error in form.ssn.errors %}
+                          {{ error|escape }}
+                        {% endfor %}
+                      </div>
+                    {% endif %}
                   </div>
                 </label>
               </div>
@@ -120,4 +141,9 @@
   </div>
 </main>
 
-{% endblock %}
+{% endblock content %}
+
+{% block javascript_page %}
+{% load staticfiles %}
+<script src="{% static 'js/verify.js' %}"></script>
+{% endblock javascript_page %}

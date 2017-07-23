@@ -18,20 +18,23 @@ class ViewTests(SimpleTestCase):
             'last_name': 'man',
             'birth_date': datetime.date(2000, 1, 1),
             'degree_year': '2008',
+            'verifyidRadios': 'umid',
             'umid': '12345678',
         }
         self.test_invalid_form_data = {
-            'first_name': 'mega',
-            'last_name': 'man1',
+            'first_name': 'dr',
+            'last_name': 'wily',
             'birth_date': datetime.date(2000, 1, 1),
             'degree_year': '2008',
+            'verifyidRadios': 'umid',
             'umid': '12345678',
         }
         self.test_ssn_form_data = {
-            'first_name': 'mega',
-            'last_name': 'man1',
+            'first_name': 'dr',
+            'last_name': 'wily',
             'birth_date': datetime.date(2000, 1, 1),
             'degree_year': '2008',
+            'verifyidRadios': 'ssn',
             'ssn': '1234',
         }
         logging.disable(logging.CRITICAL)
@@ -49,14 +52,14 @@ class ViewTests(SimpleTestCase):
     def test_empty_post_verify(self):
         response = self.client.post(reverse('verify'))
         self.assertEqual(response.status_code, 200)
-        self.assertNotIn('Unable to validate identity', str(response.content))
-        self.assertIn('<VerifyForm bound=True, valid=False, fields=(first_name;last_name;birth_date;degree_year;umid;lookupID;ssn)>', str(response.context))
+        self.assertNotIn('our system was not able to retrieve your record', str(response.content))
+        self.assertIn('<VerifyForm bound=True, valid=False, fields=(first_name;last_name;birth_date;degree_year;verifyidRadios;umid;alumniID;ssn)>', str(response.context))
 
     # Test we raise the correct error on invalid data
     def test_invalid_post_verify(self):
         response = self.client.post(reverse('verify'), self.test_invalid_form_data)
         self.assertEqual(response.status_code, 200)
-        self.assertIn('Unable to validate identity', str(response.content))
+        self.assertIn('our system was not able to retrieve your record', str(response.content))
 
     # We can't test valid data because we don't want to store it
     def test_valid_post_verify(self):
