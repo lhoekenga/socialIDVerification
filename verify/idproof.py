@@ -4,7 +4,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def validate_form_data(verify_form):
+def idproof_form_data(verify_form):
 
     try:
 

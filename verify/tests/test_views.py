@@ -65,7 +65,7 @@ class ViewTests(SimpleTestCase):
     def test_valid_post_verify(self):
         response = self.client.post(reverse('verify'), self.test_valid_form_data)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, '/verify/confirmed/')
+        self.assertIn('cirrusidentity', response.url)
 
     # For logging purposes, make sure SSN gets scrubbed properly
     def test_scrub_ssn(self):
