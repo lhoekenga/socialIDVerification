@@ -31,5 +31,5 @@ class GenerateJWTTests(SimpleTestCase):
     # Call the function we want to test with our fake data and ensure we get the expected header
     def test_create_jwt(self):
         encoded_jwt = generate_jwt(self.entry)
-        self.assertIn('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImsxIn0', str(encoded_jwt))
+        self.assertIn('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImRldjEifQ', str(encoded_jwt))
 

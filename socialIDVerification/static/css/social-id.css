@@ -1409,7 +1409,7 @@ input[type=radio][disabled] {
 .btn.focus,
 .btn:focus,
 .btn:hover {
-    color: #333;
+    //color: #333;
     text-decoration: none
 }
 

@@ -1,7 +1,8 @@
 from django import forms
 from django.core.validators import RegexValidator
 
-# our new form
+# Validation is ideally handled client side, but for browsers that
+# do not support HTML5 we can validate here
 class VerifyForm(forms.Form):
 
     first_name = forms.CharField(

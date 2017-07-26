@@ -57,7 +57,7 @@
         </div>
         <div class="form-group {% if form.degree_year.errors %}has-error{% endif %}">
           <label class="control-label" for="id_degree_year">Year of First U-M Degree:</label>
-          <input type="number" name="degree_year" class="form-control" required id="id_degree_year" placeholder="yyyy" pattern="^\d{4}$" title="yyyy" maxlength="4" value="{{ form.degree_year.value|default_if_none:"" }}" oninput="enforceMaxLength(this); enforcePattern(this)">
+          <input type="number" name="degree_year" class="form-control" required id="id_degree_year" placeholder="yyyy" pattern="^\d{4}$" title="yyyy" min="0" maxlength="4" value="{{ form.degree_year.value|default_if_none:"" }}" oninput="enforceMaxLength(this); enforcePattern(this)">
           {% if form.degree_year.errors %}
             <div class="help-block">
               {% for error in form.degree_year.errors %}
@@ -78,7 +78,7 @@
                   <input type="radio" name="verifyidRadios" id="radio_umid" value="umid" {% if form.verifyidRadios.value == "umid" %}checked="checked"{% endif %} required onclick="enableVerifyid(this)">
                   UMID. An 8-digit number found on your UM photo ID card.
                   <div class="reveal-if-active">
-                    <input type="number" id="id_umid" name="umid" class="form-control hide-disabled" pattern="^\d{8}$" maxlength="8" value="{{ form.umid.value|default_if_none:"" }}" oninput="enforceMaxLength(this); enforcePattern(this)">
+                    <input type="number" id="id_umid" name="umid" class="form-control hide-disabled" pattern="^\d{8}$" min="0" maxlength="8" value="{{ form.umid.value|default_if_none:"" }}" oninput="enforceMaxLength(this); enforcePattern(this)" {% if form.verifyidRadios.value == "umid" %}required{% endif %}>
                     {% if form.umid.errors %}
                       <div class="help-block">
                         {% for error in form.umid.errors %}
@@ -94,7 +94,7 @@
                   <input type="radio" name="verifyidRadios" id="radio_alumniID" value="alumniID" {% if form.verifyidRadios.value == "alumniID" %}checked="checked"{% endif %} onclick="enableVerifyid(this)">
                   Alumni ID. A number 7-10 digits long.
                   <div class="reveal-if-active">
-                    <input type="number" id="id_alumniID" name="alumniID" class="form-control hide-disabled" pattern="^\d{7,10}$" maxlength="10" value="{{ form.alumniID.value|default_if_none:"" }}" oninput="enforceMaxLength(this); enforcePattern(this)">
+                    <input type="number" id="id_alumniID" name="alumniID" class="form-control hide-disabled" pattern="^\d{7,10}$" min="0" maxlength="10" value="{{ form.alumniID.value|default_if_none:"" }}" oninput="enforceMaxLength(this); enforcePattern(this)" {% if form.verifyidRadios.value == "alumniID" %}required{% endif %}>
                     {% if form.alumniID.errors %}
                       <div class="help-block">
                         {% for error in form.alumniID.errors %}
@@ -110,7 +110,7 @@
                   <input type="radio" name="verifyidRadios" id="radio_ssn" value="ssn" {% if form.verifyidRadios.value == "ssn" %}checked="checked"{% endif %} onclick="enableVerifyid(this)">
                   SSN. The last four digits of your SSN.
                   <div class="reveal-if-active">
-                    <input type="number" id="id_ssn" name="ssn" class="form-control hide-disabled" pattern="^\d{4}$" maxlength="4" value="{{ form.ssn.value|default_if_none:"" }}" oninput="enforceMaxLength(this); enforcePattern(this)">
+                    <input type="number" id="id_ssn" name="ssn" class="form-control hide-disabled" pattern="^\d{4}$" min="0" maxlength="4" value="{{ form.ssn.value|default_if_none:"" }}" oninput="enforceMaxLength(this); enforcePattern(this)" {% if form.verifyidRadios.value == "ssn" %}required{% endif %}>
                     {% if form.ssn.errors %}
                       <div class="help-block">
                         {% for error in form.ssn.errors %}
