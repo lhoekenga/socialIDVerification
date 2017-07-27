@@ -5,11 +5,7 @@ __pycache__/
 
 # Config Files #
 ################
-settings.py
 .env
 certs/
 .coverage
 
-# Log Files #
-#############
-logs/

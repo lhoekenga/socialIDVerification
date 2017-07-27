@@ -2,11 +2,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.conf import settings
 
+from urllib.parse import quote_plus
 from .forms import VerifyForm
 from .idproof import idproof_form_data 
 from .cirrus_jwt import generate_jwt
 
-from urllib.parse import quote_plus
 import logging
 
 logger = logging.getLogger(__name__)

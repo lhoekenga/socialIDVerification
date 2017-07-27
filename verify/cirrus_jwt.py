@@ -1,11 +1,11 @@
+from django.conf import settings
+
 import jwt
 import time
 import uuid
 import json
-
-from django.conf import settings
-
 import logging
+
 logger = logging.getLogger(__name__)
 
 def generate_jwt(entry):

@@ -1,5 +1,3 @@
-from ldap3 import Server, Connection, ALL
-
 import logging
 
 logger = logging.getLogger(__name__)
