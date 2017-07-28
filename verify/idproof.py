@@ -24,7 +24,7 @@ def idproof_form_data(verify_form):
         logger.debug('payload={}'.format(payload))
 
         r = requests.post('https://identityproof-dev.dsc.umich.edu/identityproof/search', data=json.dumps(payload), headers=headers)
-        logger.deubg('response.json={}'.format(r.json()))
+        logger.debug('response.json={}'.format(r.json()))
         r.raise_for_status()
 
     except requests.exceptions.HTTPError as e:

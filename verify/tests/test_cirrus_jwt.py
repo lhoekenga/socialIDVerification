@@ -1,5 +1,6 @@
 from django.test import SimpleTestCase
 
+import jwt
 import logging
 
 from ..cirrus_jwt import generate_jwt
@@ -28,8 +29,8 @@ class GenerateJWTTests(SimpleTestCase):
     def tearDown(self):
         logging.disable(logging.NOTSET)
 
-    # Call the function we want to test with our fake data and ensure we get the expected header
+    # Call the function we want to test with our fake data and ensure we get start of expected payload
     def test_create_jwt(self):
         encoded_jwt = generate_jwt(self.entry)
-        self.assertIn('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImRldjEifQ', str(encoded_jwt))
+        self.assertIn('eyJjaXJydXNBdHRyaWJ1dGVzIjp7ImVkdVBlcnNvblVuaXF1ZUlkIjoiO', str(encoded_jwt))
 
