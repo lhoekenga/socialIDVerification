@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 def verify(request):
     # if this is a POST request we need to process the form data
-    logger.debug(request)
+    logger.info(request)
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = VerifyForm(request.POST)
@@ -27,7 +27,7 @@ def verify(request):
                 logger.debug('entry={}'.format(entry))
                 jwt = generate_jwt(entry)
                 cirrus_url = 'https://{}.proxy.cirrusidentity.com/module.php/cirrusaccountlink/link.php?idVerifyToken={}'.format(settings.TENANT_ID, quote_plus(jwt))
-                logger.debug('Redirecting user to {}'.format(cirrus_url))
+                logger.info('Redirecting user to {}'.format(cirrus_url))
                 return redirect(cirrus_url)
             # If unable to idproof, return the form with an error message:
             else:

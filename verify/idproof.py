@@ -1,3 +1,5 @@
+import requests
+import json
 import logging
 
 logger = logging.getLogger(__name__)
@@ -5,34 +7,34 @@ logger = logging.getLogger(__name__)
 def idproof_form_data(verify_form):
 
     try:
-
-        # testing
-        if verify_form.cleaned_data['first_name'].lower() == 'slow':
-            import time
-            time.sleep(10)
-
-        # just fake it for now
-        entry = {
-            'umichRegDisplayGivenName': ['mega'],
-            'umichRegDisplaySurname': ['man'],
-            'umichRegUid': ['megaman'],
-            'umichRegEntityID': ['13371337'],
-            'umichDirectoryID': ['999-999-13379999999999999-999'],
-            'umichOudDacID': ['0011223344'],
-            'umichOudPrefEmailAddress': ['megaman@gmail.com'],
+        payload = {
+            'firstName': verify_form.cleaned_data['first_name'],
+            'lastName': verify_form.cleaned_data['last_name'],
+            'birthdate': verify_form.cleaned_data['birth_date'].strftime('%m/%d/%Y'),
+            'degree': verify_form.cleaned_data['degree_year'],
+            'umId': verify_form.cleaned_data['umid'],
+            'alumniId': verify_form.cleaned_data['alumniID'],
+            'ssn': verify_form.cleaned_data['ssn'],
+        }
+        headers = {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
         }
 
-        if entry['umichRegDisplaySurname'][0].lower() != verify_form.cleaned_data['last_name'].lower():
-            raise Exception('last name does not match!')
+        logger.debug('payload={}'.format(payload))
 
-        if entry['umichRegDisplayGivenName'][0].lower() != verify_form.cleaned_data['first_name'].lower():
-            raise Exception('first name does not match!')
+        r = requests.post('https://identityproof-dev.dsc.umich.edu/identityproof/search', data=json.dumps(payload), headers=headers)
+        logger.deubg('response.json={}'.format(r.json()))
+        r.raise_for_status()
+
+    except requests.exceptions.HTTPError as e:
+        logger.error('HTTPError={}'.format(e))
+        return False
 
     except Exception as e:
-        logger.warn('Unable to validate identity - {} '.format(e))
+        logger.error('BaseException={}'.format(e))
         return False
 
     logger.info('form data has successfully validated')
-    return entry
-
+    return r.json()
 

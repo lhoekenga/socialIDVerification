@@ -150,6 +150,7 @@ LOGGING = {
 CERT_DIR = config('CERT_DIR', default=BASE_DIR + "/socialIDVerification/certs/")
 
 # Cirrus JWT config
+JWT_PRIVATE_KEY = config('JWT_PRIVATE_KEY', default='social-login.dsc.umich.edu.key') 
 JWT_KEY_ID = config('JWT_KEY_ID', default='prod1')
 TENANT_ID = config('TENANT_ID', default='umich')
 
