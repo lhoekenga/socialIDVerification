@@ -21,9 +21,10 @@ def idproof_form_data(verify_form):
             'Accept': 'application/json',
         }
 
-        logger.debug('payload={}'.format(payload))
+        logger.debug('payload={}'.format(json.dumps(payload)))
 
         r = requests.post('https://identityproof-dev.dsc.umich.edu/identityproof/search', data=json.dumps(payload), headers=headers)
+        logger.debug('r={}'.format(r))
         logger.debug('response.json={}'.format(r.json()))
         r.raise_for_status()
 

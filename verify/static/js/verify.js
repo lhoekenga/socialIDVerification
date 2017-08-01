@@ -24,4 +24,9 @@ function enableVerifyid(element) {
         }
     }
 }
-
+function disableSubmitBtn()
+{
+   document.getElementById("id_submit_btn").classList.remove("btn-blue");
+   document.getElementById("id_submit_btn").value = "Submitting...";
+   document.getElementById("id_submit_btn").disabled = true;
+}
