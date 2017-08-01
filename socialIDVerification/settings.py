@@ -149,8 +149,12 @@ LOGGING = {
 # Security
 CERT_DIR = config('CERT_DIR', default=BASE_DIR + "/socialIDVerification/certs/")
 
+# ID Proof Mutual Auth
+IDPROOF_CERT = CERT_DIR + config('IDPROOF_CERT', default='social-login.dsc.umich.edu.cert')
+IDPROOF_KEY = CERT_DIR + config('IDPROOF_KEY', default='social-login.dsc.umich.edu.key')
+
 # Cirrus JWT config
-JWT_PRIVATE_KEY = CERT_DIR + config('JWT_PRIVATE_KEY', default='social-login.dsc.umich.edu.key') 
+JWT_PRIVATE_KEY = CERT_DIR + config('JWT_PRIVATE_KEY', default='jwt-prod1.key') 
 JWT_KEY_ID = config('JWT_KEY_ID', default='prod1')
 TENANT_ID = config('TENANT_ID', default='umich')
 

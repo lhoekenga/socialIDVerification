@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 def idproof_form_data(verify_form):
 
     try:
-        #cert = (settings.IDPROOF_CERT, settings.IDPROOF_KEY)
+        cert = (settings.IDPROOF_CERT, settings.IDPROOF_KEY)
 
         payload = {
             'firstName': verify_form.cleaned_data['first_name'],
@@ -27,7 +27,12 @@ def idproof_form_data(verify_form):
 
         logger.debug('payload={}'.format(json.dumps(payload)))
 
-        r = requests.post('https://identityproof-dev.dsc.umich.edu/identityproof/search', data=json.dumps(payload), headers=headers)
+        r = requests.post(
+            'https://identityproof-dev.dsc.umich.edu/identityproof/search',
+            data=json.dumps(payload),
+            headers=headers,
+            cert=cert,
+        )
         logger.debug('r={}'.format(r))
         logger.debug('response.json={}'.format(r.json()))
         r.raise_for_status()
