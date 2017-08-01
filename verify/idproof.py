@@ -1,3 +1,5 @@
+from django.conf import settings
+
 import requests
 import json
 import logging
@@ -7,6 +9,8 @@ logger = logging.getLogger(__name__)
 def idproof_form_data(verify_form):
 
     try:
+        #cert = (settings.IDPROOF_CERT, settings.IDPROOF_KEY)
+
         payload = {
             'firstName': verify_form.cleaned_data['first_name'],
             'lastName': verify_form.cleaned_data['last_name'],

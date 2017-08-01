@@ -116,7 +116,7 @@ LOGGING = {
             'format': '%(asctime)s %(levelname)s %(module)s %(process)d %(thread)d %(message)s'
         },
         'simple': {
-            'format': '%(levelname)s %(message)s'
+            'format': '%(name)s %(levelname)s %(message)s'
         },
     },
     'handlers': {
@@ -150,10 +150,9 @@ LOGGING = {
 CERT_DIR = config('CERT_DIR', default=BASE_DIR + "/socialIDVerification/certs/")
 
 # Cirrus JWT config
-JWT_PRIVATE_KEY = config('JWT_PRIVATE_KEY', default='social-login.dsc.umich.edu.key') 
+JWT_PRIVATE_KEY = CERT_DIR + config('JWT_PRIVATE_KEY', default='social-login.dsc.umich.edu.key') 
 JWT_KEY_ID = config('JWT_KEY_ID', default='prod1')
 TENANT_ID = config('TENANT_ID', default='umich')
-
 
 # Error messages
 VALIDATION_ERROR_MESSAGE = "We're sorry, our system was not able to retrieve your record. Please make sure your information is entered as it appears on mailings you receive from the University of Michigan. If the retrieval error continues, it may be because our database lists your information incorrectly. For help, you can contact the ITS Service Center at 734-764-HELP (764-4357) or 4HELP@umich.edu."

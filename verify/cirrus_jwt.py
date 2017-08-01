@@ -36,7 +36,7 @@ def generate_jwt(entry):
         logger.debug('payload={}'.format(payload))
 
         # Encode the payload
-        key = settings.CERT_DIR + settings.JWT_PRIVATE_KEY
+        key = settings.JWT_PRIVATE_KEY
         private_key = open(key, 'r').read()  # RSA key in PEM format
         token = jwt.encode(payload, key=private_key, algorithm='RS256', headers={'kid': settings.JWT_KEY_ID})
         #logger.debug('token={}'.format(token))
