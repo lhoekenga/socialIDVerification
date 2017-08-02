@@ -150,6 +150,7 @@ LOGGING = {
 CERT_DIR = config('CERT_DIR', default=BASE_DIR + "/socialIDVerification/certs/")
 
 # ID Proof Mutual Auth
+IDPROOF_URL = config('IDPROOF_URL', default='https://identityproof.dsc.umich.edu/identityproof/search')
 IDPROOF_CERT = CERT_DIR + config('IDPROOF_CERT', default='social-login.dsc.umich.edu.cert')
 IDPROOF_KEY = CERT_DIR + config('IDPROOF_KEY', default='social-login.dsc.umich.edu.key')
 
