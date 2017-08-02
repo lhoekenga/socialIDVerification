@@ -39,7 +39,6 @@ def generate_jwt(entry):
         key = settings.JWT_PRIVATE_KEY
         private_key = open(key, 'r').read()  # RSA key in PEM format
         token = jwt.encode(payload, key=private_key, algorithm='RS256', headers={'kid': settings.JWT_KEY_ID})
-        #logger.debug('token={}'.format(token))
 
     except Exception as e:
         logger.error('exception={}'.format(e))
