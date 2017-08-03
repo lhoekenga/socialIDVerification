@@ -14,15 +14,25 @@ def generate_jwt(entry):
         # Attributes required/requested by Cirrus
         epoch_time = int(time.time())
         exp_time = epoch_time + 300
-        eppn = entry['umichRegUid'] + '@umich.edu'
         dirId = entry['umichDirectoryID'].replace('-', 'x')
+
+        # DirectoryID is the primary identifier and the only required attribute
         cirrusAttributes = {
-            'alumniId': entry['umichOudDacId'],
-            'alumniEmail': entry['umichOudPrefEmailAddress'],
             'eduPersonUniqueId': dirId,
-            'employeeNumber': entry['umichRegEntityID'],
-            'eppn': eppn,
         }
+
+        # Add optional identifiers if we have values
+        if 'umichRegUid' in entry:
+            cirrusAttributes['eppn'] = entry['umichRegUid'] + '@umich.edu'
+
+        if 'umichRegEntityID' in entry:
+            cirrusAttributes['employeeNumber'] = entry['umichRegEntityID']
+
+        if 'umichOudDacId' in entry:
+            cirrusAttributes['alumniId'] = entry['umichOudDacId']
+
+        if 'umichOudPrefEmailAddress' in entry:
+            cirrusAttributes['alumniEmail'] = entry['umichOudPrefEmailAddress']
 
         # Build the jwt payload
         payload = {
