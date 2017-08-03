@@ -160,4 +160,5 @@ JWT_KEY_ID = config('JWT_KEY_ID', default='prod1')
 TENANT_ID = config('TENANT_ID', default='umich')
 
 # Error messages
-VALIDATION_ERROR_MESSAGE = "We're sorry, our system was not able to retrieve your record. Please make sure your information is entered as it appears on mailings you receive from the University of Michigan. If the retrieval error continues, it may be because our database lists your information incorrectly. For help, you can contact the ITS Service Center at 734-764-HELP (764-4357) or 4HELP@umich.edu."
+SYSTEM_ERROR_MESSAGE = config('SYSTEM_ERROR_MESSAGE', default="We're sorry. Something isn't right. We're experiencing a system issue. Please try again later. If you continue to have difficulty, contact the ITS Service Center at 734-764-HELP (764-4357) or 4HELP@umich.edu.")
+VALIDATION_ERROR_MESSAGE = config('VALIDATION_ERROR_MESSAGE', default="We're sorry, our system was not able to retrieve your record. Please make sure your information is entered as it appears on mailings you receive from the University of Michigan. If the retrieval error continues, it may be because our database lists your information incorrectly. For help, you can contact the ITS Service Center at 734-764-HELP (764-4357) or 4HELP@umich.edu.")
