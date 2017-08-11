@@ -52,5 +52,6 @@ def generate_jwt(entry):
 
     except Exception as e:
         logger.error('exception={}'.format(e))
+        raise
 
     return token

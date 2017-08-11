@@ -39,3 +39,16 @@ class VerifyFormTests(SimpleTestCase):
         self.assertEqual(form.errors['degree_year'], ['This field is required.'])
         self.assertEqual(form.errors['verifyidRadios'], ['This field is required.'])
 
+    # Test leading and trailing zeros are not stripped
+    def test_zero_trimming_data(self):
+        test_ssn = '0110'
+        form = VerifyForm({
+            'first_name': 'mega',
+            'last_name': 'man',
+            'birth_date': datetime.date(2000, 1, 1),
+            'degree_year': '2008',
+            'verifyidRadios': 'ssn',
+            'ssn': test_ssn,
+        })
+        self.assertTrue(form.is_valid())
+        self.assertEqual(form.cleaned_data['ssn'], test_ssn)

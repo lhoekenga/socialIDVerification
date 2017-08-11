@@ -73,3 +73,15 @@ class ViewTests(SimpleTestCase):
         self.assertEqual('xxxx', cleaned_form['ssn'])
         self.assertNotEqual('1324', cleaned_form['ssn'])
 
+    def test_leading_zero(self):
+        test_ssn = '0110'
+        test_leading_zero_form_data = {
+            'first_name': 'dr',
+            'last_name': 'wily',
+            'birth_date': datetime.date(2000, 1, 1),
+            'degree_year': '2008',
+            'verifyidRadios': 'ssn',
+            'ssn': test_ssn,
+        }
+        response = self.client.post(reverse('verify'), test_leading_zero_form_data)
+        self.assertIn('maxlength="4" value="{}"'.format(test_ssn), str(response.content))    # Kinda hacky
