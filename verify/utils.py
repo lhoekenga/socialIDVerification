@@ -4,7 +4,7 @@
 def scrub_ssn(clean_data):
     try:
         data_copy = clean_data.copy()
-        if 'ssn' in data_copy:
+        if data_copy['ssn']:
             data_copy['ssn'] = 'xxxx'
     except:
         return clean_data
