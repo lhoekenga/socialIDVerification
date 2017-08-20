@@ -1,7 +1,7 @@
 from django.test import SimpleTestCase
 from django.urls import reverse
 
-from ..views import scrub_ssn
+from ..utils import scrub_ssn
 
 import datetime
 import logging
