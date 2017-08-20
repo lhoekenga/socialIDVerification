@@ -6,7 +6,6 @@ from urllib.parse import quote_plus
 from .forms import VerifyForm
 from .idproof import idproof_form_data 
 from .cirrus_jwt import generate_jwt
-from .utils import scrub_ssn
 
 import logging
 
@@ -23,7 +22,7 @@ def verify(request):
         if form.is_valid():
             try:
                 # process the data in form.cleaned_data as required
-                logger.debug('form={}'.format(scrub_ssn(form.cleaned_data)))
+                logger.debug('form={}'.format(form.cleaned_data))
                 entry = idproof_form_data(form.cleaned_data)
 
                 # if we have an entry, then idproof was successful, so get jwt and sent them to cirrus:

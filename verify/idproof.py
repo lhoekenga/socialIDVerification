@@ -1,7 +1,5 @@
 from django.conf import settings
 
-from .utils import scrub_ssn
-
 import requests
 import json
 import logging
@@ -29,7 +27,7 @@ def idproof_form_data(form_cleaned_data):
             'Content-type': 'application/json',
             'Accept': 'application/json',
         }
-        logger.debug('post_url={} payload={}'.format(settings.IDPROOF_URL, json.dumps(scrub_ssn(payload))))
+        logger.debug('post_url={} payload={}'.format(settings.IDPROOF_URL, json.dumps(payload)))
 
         # Make the request
         r = requests.post(

@@ -36,7 +36,7 @@ def generate_jwt(entry):
 
         # Build the jwt payload
         payload = {
-            'aud': 'umich-uat',
+            'aud': settings.TENANT_ID,
             'iat': epoch_time,
             'exp': exp_time,
             'jti': str(uuid.uuid4()),
