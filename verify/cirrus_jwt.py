@@ -14,7 +14,7 @@ def generate_jwt(entry):
         # Attributes required/requested by Cirrus
         epoch_time = int(time.time())
         exp_time = epoch_time + 300
-        dirId = entry['umichDirectoryID'].replace('-', 'x')
+        dirId = entry['umichDirectoryID'].replace('-', 'x') + '@umich.edu'
 
         # DirectoryID is the primary identifier and the only required attribute
         cirrusAttributes = {
